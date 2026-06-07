@@ -1,0 +1,100 @@
+
+<style>
+    @media (min-width:400px) and (max-width:1500px) {
+        body {
+            margin: 20px 50px 0 50px;
+            background-color:black;
+            color:white;
+        }
+
+        form {
+           display:flex;
+           justify-content:;
+        }
+
+        form input {
+            width: 200px;
+            text-align: center;
+            margin-right: 20px;
+            width: 200px;
+            height: 30px;
+            border-radius: 20px;
+        }
+
+        form button {
+            border-radius: 15px;
+            width: 80px;
+        }
+
+         #del{
+           display:grid;
+           position:relative;
+           left:94%;
+           //top:180px;
+           margin-bottom:20px;
+        }
+        a {
+            display:flex;
+            justify-content:end;
+            height: 30px;
+            text-decoration:none;
+        }
+        div{
+            display:flex;
+            justify-content:space-between;
+        }
+        span {
+           display:flex;
+        }
+        span a{
+            padding:15px;
+            color:white;
+            font-size:20px;
+        }
+        table{
+            margin-top:20px;
+        }
+    }
+</style>
+
+<body>
+    <div>
+        <h2>Your Expense Details</h2>
+        <span>
+        <a  href="{%url 'add_expense'%}">Add Expense</a>
+        <a href="{%url 'logout'%}">Logout</a>
+        </span>
+    </div>
+    <form method="get" action="">
+        <input type="text" name="q" placeholder="Search Expenses" value="{{query|default_if_none:""}}">
+        <button type="submit">Search </button>
+    </form>
+    <table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; width: 90%;">
+        <tr>
+            <th style="border: 1px solid white;">Title</th>
+            <th style="border: 1px solid white;">Amount</th>
+            <th style="border: 1px solid white;">Category</th>
+            <th style="border: 1px solid white;">Date</th>
+        </tr>
+    
+        {% for exp in expenses %}
+        <tr style="text-align:center;">
+           
+            <td style="border: 1px solid white;">{{exp.title}}</td>
+            <td style="border: 1px solid white;">{{exp.amount}}</td>
+            <td style="border: 1px solid white;">{{exp.category}}</td>
+            <td style="border: 1px solid white;">{{exp.date}}</td>
+        </tr>
+        <form id="delete" action="{% url 'delete' exp.id %}" method="post"
+            onsubmit="return confirm('Are you sure you want to delete this expense?');">
+            {%csrf_token%}
+            <button id="del" type="submit">delete</button>
+        </form>
+        {% empty %}
+        <tr>
+            <td colspan="4" style="border: 1px solid black; text-align: center;">no expense add </td>
+        </tr>
+        {% endfor %}
+        
+    </table>
+</body>

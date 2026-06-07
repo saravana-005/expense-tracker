@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title%}Home{%endblock%}
+ {% block extra_styles %}
+<style>
+    @media (min-width:400px) and (max-width:1500px){
+        body{
+        background-color: black;
+        color: aqua;
+        }
+        header{
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid black;
+    border-radius: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 20px;
+ }
+ h1:hover{
+   background:linear-gradient(to right ,blue,red);
+   -webkit-background-clip:text;
+   -webkit-text-fill-color:transparent;
+
+ }
+ #log{
+    margin: 20px 70px 0px 0px;
+    text-decoration:none;
+    color: aqua;
+    border: 1px solid blue;
+    border-radius: 10px;
+    width: fit-content;
+    max-width: 100%;
+    height: fit-content;
+    max-height: 100%;
+    padding: 0px 5px 5px 5px;
+    background-color: blue;
+ }
+ a{
+    margin: 20px 0px 0px 0px;
+    text-decoration:none;
+    color: aqua;
+    position: relative;
+    left:80px;
+ }
+ button:hover{
+   background:linear-gradient(to right ,blue,red);
+   -webkit-background-clip:text;
+   -webkit-text-fill-color:transparent;
+
+ }
+ button{
+    width: 150px;
+    border-radius:20px;
+    height: 30px;
+   transition:all 0.3s ease-in-out;
+   font-size: larger;
+ }
+ div{
+    display:grid;
+    justify-content: center;
+ }
+ h1{
+    font-size: 50px;
+    position: relative;
+    top: 50px;
+    transition:all 0.3s ease-in-out;
+ }
+}
+   
+</style> 
+{% endblock %}
+
+{% block content %}
+ <header>
+      <h2 style="position: relative;">Expense tracker</h2>
+      <a id="log" href="{%url 'logout' %}">logout </a>
+    </header>
+    <div>
+<h1> Welcome <span style="text-transform:capitalize;">{{request.user.username}}!! </span></h1><br>
+ <a  href="{%url 'add_expense'%}"><button>Add Expense</button> </a>
+ <a  href="{%url 'sheet'%}"><button>Tracker sheet</button> </a>
+ </div>
+ {% endblock %}
+
+
